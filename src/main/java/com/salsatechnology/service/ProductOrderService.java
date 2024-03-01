@@ -27,11 +27,46 @@ public class ProductOrderService {
 		productOrder.setUserName(productOrderDTO.getUserName());
 		productOrder.setProductType(productOrderDTO.getProductType());
 		productOrder.setTimeHour(productOrderDTO.getTimeHour());
-		
-		productOrder.setProductValue(null);
-		productOrder.setProductTotal(null);
-		productOrder.setUserAmount(null);
+		Long productValue = calculateProductValue(productOrderDTO);
+		Long productTotal = calculateProductTotal(productOrderDTO, productValue);
+		Long userAmount = calculateUserAmount(productOrderDTO, productTotal);
+		productOrder.setProductValue(productValue);
+		productOrder.setProductTotal(productTotal);
+		productOrder.setUserAmount(userAmount);
 		return productOrder;
 	}
 
+	private Long calculateProductValue(ProductOrderDTO productOrderDTO){
+		switch (productOrderDTO.getProductType()){
+			case SUNSHADE:
+				return (40L*100L);
+			case SURFBOARD:
+				return (50L*100L);
+			case SAND_BOARD:
+				return (25L*100L);
+			case BEACH_CHAIR:
+				return (35L*100L);
+			case BEACH_TABLE:
+				return (25L*100L);
+		}
+		return 0L;
+	}
+	private Long calculateProductTotal(ProductOrderDTO productOrderDTO, Long productValue){
+		return (productValue * productOrderDTO.getTimeHour());
+	}
+	private Long calculateUserAmount(ProductOrderDTO productOrderDTO, Long productTotal){
+		switch (productOrderDTO.getProductType()){
+			case SUNSHADE:
+				return (long)(productTotal*10.3);
+			case SURFBOARD:
+				return (long)(productTotal*15.6);
+			case SAND_BOARD:
+				return (productTotal*9);
+			case BEACH_CHAIR:
+				return (productTotal*5);
+			case BEACH_TABLE:
+				return (long)(productTotal*8.1);
+		}
+		return 0L;
+	}
 }

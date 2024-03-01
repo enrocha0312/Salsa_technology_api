@@ -21,12 +21,12 @@ public class ProductOrder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	private String userName;
-	
-	@Enumerated(EnumType.STRING)	
+
+	@Enumerated(EnumType.STRING)
 	private ProductType productType;
-	
+
 	private Integer timeHour;
 	private Long productValue;
 	private Long productTotal;
