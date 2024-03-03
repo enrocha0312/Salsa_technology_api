@@ -33,6 +33,7 @@ public class ProductOrderController {
 	@ApiOperation(value = "retornar por usuario")
 	@GetMapping("/{username}")
 	public ResponseEntity<List<ProductOrder>> findByUsername(@PathVariable String username){
-		return new ResponseEntity<>(productOrderService.findByUsername(username), HttpStatus.OK);
+		List<ProductOrder> orders = productOrderService.findByUsername(username);
+		return new ResponseEntity<>(orders, HttpStatus.OK);
 	}
 }

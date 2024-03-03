@@ -2,6 +2,7 @@ package com.salsatechnology.service;
 
 import javax.transaction.Transactional;
 
+import com.salsatechnology.exceptions.service.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,11 @@ public class ProductOrderService {
 	}
 
 	public List<ProductOrder> findByUsername (String username){
-		return productOrderRepository.findByUsername(username);
+		List<ProductOrder> productOrders = productOrderRepository.findByUsername(username);
+		if (productOrders.isEmpty()){
+			throw new ResourceNotFoundException(username);
+		}
+		return productOrders;
 	}
 
 	private ProductOrder createProductOrder(ProductOrderDTO productOrderDTO) {
