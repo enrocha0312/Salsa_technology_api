@@ -11,6 +11,9 @@ import com.salsatechnology.repository.ProductOrderRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ProductOrderService {
@@ -20,6 +23,10 @@ public class ProductOrderService {
 	@Transactional
 	public void createOrder(ProductOrderDTO productOrderDTO) {
 		productOrderRepository.save(createProductOrder(productOrderDTO));
+	}
+
+	public List<ProductOrder> findByUsername (String username){
+		return productOrderRepository.findByUsername(username);
 	}
 
 	private ProductOrder createProductOrder(ProductOrderDTO productOrderDTO) {
