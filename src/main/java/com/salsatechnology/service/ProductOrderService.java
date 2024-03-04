@@ -22,8 +22,8 @@ public class ProductOrderService {
 	private final ProductOrderRepository productOrderRepository;
 	
 	@Transactional
-	public void createOrder(ProductOrderDTO productOrderDTO) {
-		productOrderRepository.save(createProductOrder(productOrderDTO));
+	public ProductOrder createOrder(ProductOrderDTO productOrderDTO) {
+		return productOrderRepository.save(createProductOrder(productOrderDTO));
 	}
 
 	public List<ProductOrder> findByUsername (String username){
@@ -69,15 +69,15 @@ public class ProductOrderService {
 	private Long calculateUserAmount(ProductOrderDTO productOrderDTO, Long productTotal){
 		switch (productOrderDTO.getProductType()){
 			case SUNSHADE:
-				return (long)(productTotal*10.3);
+				return (long)(productTotal*0.103);
 			case SURFBOARD:
-				return (long)(productTotal*15.6);
+				return (long)(productTotal*0.156);
 			case SAND_BOARD:
-				return (productTotal*9);
+				return (long)(productTotal*0.09);
 			case BEACH_CHAIR:
-				return (productTotal*5);
+				return (long)(productTotal*0.05);
 			case BEACH_TABLE:
-				return (long)(productTotal*8.1);
+				return (long)(productTotal*0.081);
 		}
 		return 0L;
 	}

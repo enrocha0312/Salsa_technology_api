@@ -25,10 +25,10 @@ public class ProductOrderController {
 	private ProductOrderService productOrderService;
 
 	@ApiOperation(value = "criar pedido de produto")
-	@PostMapping("/create")
-	@ResponseStatus(HttpStatus.CREATED)
-	public void createOrder(@RequestBody @Valid ProductOrderDTO productOrderDTO) {
-		productOrderService.createOrder(productOrderDTO);
+	@PostMapping
+	public ResponseEntity<ProductOrder> createOrder(@RequestBody @Valid ProductOrderDTO productOrderDTO) {
+		ProductOrder productOrder = productOrderService.createOrder(productOrderDTO);
+		return new ResponseEntity<>(productOrder, HttpStatus.OK);
 	}
 	@ApiOperation(value = "retornar por usuario")
 	@GetMapping("/{username}")

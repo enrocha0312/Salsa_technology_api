@@ -25,4 +25,5 @@ public class ResourceExceptionHandler {
                 .build();
         return ResponseEntity.status(status).body(err);
     }
+
 }
