@@ -28,7 +28,7 @@ public class ProductOrderController {
 	@PostMapping
 	public ResponseEntity<ProductOrder> createOrder(@RequestBody @Valid ProductOrderDTO productOrderDTO) {
 		ProductOrder productOrder = productOrderService.createOrder(productOrderDTO);
-		return new ResponseEntity<>(productOrder, HttpStatus.OK);
+		return new ResponseEntity<>(productOrder, HttpStatus.CREATED);
 	}
 	@ApiOperation(value = "retornar por usuario")
 	@GetMapping("/{username}")
